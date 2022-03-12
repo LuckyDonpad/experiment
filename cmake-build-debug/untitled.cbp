@@ -77,6 +77,12 @@
 		<Unit filename="E:/clionProjects/untitled/main.c">
 			<Option target="untitled"/>
 		</Unit>
+		<Unit filename="E:/clionProjects/untitled/sorts/sorts.c">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="E:/clionProjects/untitled/sorts/sorts.h">
+			<Option target="untitled"/>
+		</Unit>
 		<Unit filename="E:/clionProjects/untitled/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

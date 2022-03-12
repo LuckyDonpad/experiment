@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/untitled.dir/main.c.obj"
+  "CMakeFiles/untitled.dir/sorts/sorts.c.obj"
   "libuntitled.dll.a"
   "untitled.exe"
   "untitled.exe.manifest"

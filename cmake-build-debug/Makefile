@@ -152,6 +152,30 @@ main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\untitled.dir\build.make CMakeFiles/untitled.dir/main.c.s
 .PHONY : main.c.s
 
+sorts/sorts.obj: sorts/sorts.c.obj
+.PHONY : sorts/sorts.obj
+
+# target to build an object file
+sorts/sorts.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\untitled.dir\build.make CMakeFiles/untitled.dir/sorts/sorts.c.obj
+.PHONY : sorts/sorts.c.obj
+
+sorts/sorts.i: sorts/sorts.c.i
+.PHONY : sorts/sorts.i
+
+# target to preprocess a source file
+sorts/sorts.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\untitled.dir\build.make CMakeFiles/untitled.dir/sorts/sorts.c.i
+.PHONY : sorts/sorts.c.i
+
+sorts/sorts.s: sorts/sorts.c.s
+.PHONY : sorts/sorts.s
+
+# target to generate assembly for a file
+sorts/sorts.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\untitled.dir\build.make CMakeFiles/untitled.dir/sorts/sorts.c.s
+.PHONY : sorts/sorts.c.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -164,6 +188,9 @@ help:
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... sorts/sorts.obj
+	@echo ... sorts/sorts.i
+	@echo ... sorts/sorts.s
 .PHONY : help
 
 

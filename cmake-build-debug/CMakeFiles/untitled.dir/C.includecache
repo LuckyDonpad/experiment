@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+E:/clionProjects/untitled/sorts/sorts.c
+sorts.h
+E:/clionProjects/untitled/sorts/sorts.h
+
+E:/clionProjects/untitled/sorts/sorts.h
+stdlib.h
+-
+stdio.h
+-
+stdbool.h
+-
+time.h
+-
+
