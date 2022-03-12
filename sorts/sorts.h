@@ -9,13 +9,14 @@
 # include <stdio.h>
 # include <stdbool.h>
 # include <time.h>
+# include "iso646.h"
 
-# define TIME_TEST (testCode, time) { \
- clock_t start_time = clock(); \
- testCode \
-    clock_t end_time = clock(); \
- clock_t sort_time = end_time - start_time; \
- time = (double) sort_time / CLOCKS_PER_SEC; \
+# define TIME_TEST(testCode, time) {\
+ clock_t start_time = clock();\
+ testCode\
+    clock_t end_time = clock();\
+ clock_t sort_time = end_time - start_time;\
+ time = (double) sort_time / CLOCKS_PER_SEC;\
   }
 
 typedef struct SortFunc {
@@ -29,5 +30,17 @@ typedef struct GeneratingFunc {
 } GeneratingFunc;
 
 double getTime();
+
+void checkTime(void (*sortFunc)(int *, size_t),
+               void (*generateFunc)(int *, size_t),
+               size_t size, char *experimentName);
+
+void generateOrdered(int *a, size_t n);
+
+void generateOrderedBackward(int *a, size_t n);
+
+void generateRandom(int *a, size_t n);
+
+int isOrdered(int *a, size_t n);
 
 #endif //UNTITLED_SORTS_H

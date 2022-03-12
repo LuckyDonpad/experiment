@@ -41,10 +41,46 @@ void checkTime(void (*sortFunc)(int *, size_t),
         printf("Wrong !\n");
 
         // вывод массива, который не смог быть отсортирован
-        outputArray_(innerBuffer, size);
+      //  outputArray_(innerBuffer, size);
 
         exit(1);
     }
+}
+
+//
+// Created by Donpad on 12.03.2022.
+//
+
+#include "sorts.h"
+
+void generateOrdered(int *a, size_t n) {
+    for (int i = 0; i < n; ++i) {
+        a[i] = i;
+    }
+}
+
+void generateOrderedBackward(int *a, size_t n) {
+    for (int i = 0; i < n; ++i) {
+        a[i] = (int) n - i;
+    }
+}
+
+void generateRandom(int *a, size_t n) {
+    for (int i = 0; i < n; ++i) {
+        a[i] = rand() % n;
+    }
+}
+
+int isOrdered(int *a, size_t n) {
+    int isOrdered = 1;
+    if (n > 1) {
+        size_t i = 1;
+        while (i < n and isOrdered) {
+            isOrdered = a[i] >= a[i - 1];
+            i++;
+        }
+    }
+    return isOrdered;
 }
 
 
