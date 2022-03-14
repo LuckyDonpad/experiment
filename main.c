@@ -53,7 +53,7 @@ void test_isOrdered() {
 void test_generation() {
     size_t size = 1000;
     int array[size];
-    generateOrdered(array,size);
+    generateOrdered(array, size);
     assert(isOrdered(array, size));
     generateOrderedBackward(array, size);
     assert(!isOrdered(array, size));
@@ -61,12 +61,64 @@ void test_generation() {
     assert(!isOrdered(array, size));
 }
 
+void test_swap_smokeTest() {
+    int a = 42;
+    int b = 69;
+    swap(&a, &b);
+    assert(a == 69 and b == 42);
+}
+
+void test_dumbBubbleSort_smokeTest(){
+    int array[100];
+    generateRandom(array, 100);
+    dumbBubbleSort(array, 100);
+    assert(isOrdered(array, 100));
+}
+
+void test_smartBubbleSort_smokeTest(){
+    int array[100];
+    generateRandom(array, 100);
+    smartBubbleSort(array, 100);
+    assert(isOrdered(array, 100));
+}
+
+// You have awakened an ancient evil
+void test_bogosort_loooooooooooooooooooooooooongTest(){
+    int array[13];
+    generateRandom(array, 13);
+    bogoSort(array, 13);
+    assert(isOrdered(array, 13));
+}
+
+void test_insertionSort_smokeTest(){
+    int array[100];
+    generateRandom(array, 100);
+    insertionSort(array, 100);
+    assert(isOrdered(array, 100));
+}
+
+void test_selectionSort_smokeTest(){
+    int array[100];
+    generateRandom(array, 100);
+    selectionSort(array, 100);
+    assert(isOrdered(array, 100));
+}
+
+
 void test() {
     test_isOrdered();
     test_generation();
+    test_swap_smokeTest();
+    test_dumbBubbleSort_smokeTest();
+    test_smartBubbleSort_smokeTest();
+    //test_bogosort_loooooooooooooooooooooooooongTest();
+    test_insertionSort_smokeTest();
+    test_selectionSort_smokeTest();
 }
 
 int main() {
     test();
+
+    return 0;
 }
 

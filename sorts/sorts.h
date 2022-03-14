@@ -43,4 +43,24 @@ void generateRandom(int *a, size_t n);
 
 int isOrdered(int *a, size_t n);
 
+void swap(int *a, int *b);
+
+void dumbBubbleSort(int *a, size_t n);
+
+void smartBubbleSort(int *a, size_t n);
+
+void randomSwap(int *a, size_t n);
+
+void bogoSort(int *a, size_t n);
+
+void insertionSort(int *a, size_t n);
+
+void selectionSort(int *a, size_t n);
+
+void combSort(int *a, size_t n);
+
+void shellSort(int *a, size_t n);
+
+void radixSort(int *a, size_t n);
+
 #endif //UNTITLED_SORTS_H

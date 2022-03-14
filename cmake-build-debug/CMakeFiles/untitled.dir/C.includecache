@@ -6,7 +6,17 @@
 
 #IncludeRegexTransform: 
 
+E:/clionProjects/untitled/main.c
+stdio.h
+-
+sorts/sorts.h
+E:/clionProjects/untitled/sorts/sorts.h
+assert.h
+E:/clionProjects/untitled/assert.h
+
 E:/clionProjects/untitled/sorts/sorts.c
+sorts.h
+E:/clionProjects/untitled/sorts/sorts.h
 sorts.h
 E:/clionProjects/untitled/sorts/sorts.h
 
@@ -19,4 +29,6 @@ stdbool.h
 -
 time.h
 -
+iso646.h
+E:/clionProjects/untitled/sorts/iso646.h
 

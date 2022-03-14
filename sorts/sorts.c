@@ -18,8 +18,8 @@ void checkTime(void (*sortFunc)(int *, size_t),
     // замер времени
     double time;
     TIME_TEST({
-        sortFunc(innerBuffer, size);
-    }, time);
+                  sortFunc(innerBuffer, size);
+              }, time);
 
     // результаты замера
     printf("Status:  ");
@@ -41,7 +41,7 @@ void checkTime(void (*sortFunc)(int *, size_t),
         printf("Wrong !\n");
 
         // вывод массива, который не смог быть отсортирован
-      //  outputArray_(innerBuffer, size);
+        //  outputArray_(innerBuffer, size);
 
         exit(1);
     }
@@ -81,6 +81,65 @@ int isOrdered(int *a, size_t n) {
         }
     }
     return isOrdered;
+}
+
+void swap(int *a, int *b) {
+    int tmp = *a;
+    *a = *b;
+    *b = tmp;
+}
+
+void dumbBubbleSort(int *a, size_t n) {
+    for (size_t i = 0; i < n - 1; ++i)
+        for (size_t j = n - 1; j > i; j--)
+            if (a[j] < a[j - 1])
+                swap(&a[j - 1], &a[j]);
+}
+
+void smartBubbleSort(int *a, size_t n) {
+    for (size_t i = 0; i < n - 1; ++i) {
+        int isSwap = 0;
+        for (size_t j = n - 1; j > i; j--)
+            if (a[j] < a[j - 1]) {
+                swap(&a[j - 1], &a[j]);
+                isSwap = 1;
+            }
+        if (!isSwap)
+            break;
+    }
+}
+
+void randomSwap(int *a, size_t n) {
+    swap(&a[rand() % n], &a[rand() % n]);
+}
+
+void bogoSort(int *a, size_t n) {
+    while (!isOrdered(a, n)) {
+        randomSwap(a, n);
+    }
+}
+
+void insertionSort(int *a, size_t n) {
+    for (size_t i = 1; i < n; ++i) {
+        int t = a[i];
+        size_t j = i;
+        while (j > 0 && a[j - 1] > t) {
+            a[j] = a[j - 1];
+            j--;
+        }
+        a[j] = t;
+    }
+}
+
+void selectionSort(int *a, size_t n) {
+    for (size_t i = 0; i < n; ++i) {
+        size_t indexOfMin = i;
+        for (size_t j = i + 1; j < n; ++j)
+            if (a[j] < a[indexOfMin])
+                indexOfMin = j;
+        if (indexOfMin != i)
+            swap(&a[i], &a[indexOfMin]);
+    }
 }
 
 
