@@ -11,6 +11,8 @@
 # include <time.h>
 # include "iso646.h"
 
+#define ARRAY_SIZE(a) sizeof(a) / sizeof(a[0]);
+
 # define TIME_TEST(testCode, time) {\
  clock_t start_time = clock();\
  testCode\
@@ -60,6 +62,8 @@ void selectionSort(int *a, size_t n);
 void combSort(int *a, size_t n);
 
 void shellSort(int *a, size_t n);
+
+void hibbardShellSort(int *const a, size_t n);
 
 void radixSort(int *a, size_t n);
 

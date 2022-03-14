@@ -3,6 +3,8 @@
 //
 
 #include "sorts.h"
+#include <math.h>
+
 
 void checkTime(void (*sortFunc)(int *, size_t),
                void (*generateFunc)(int *, size_t),
@@ -27,9 +29,9 @@ void checkTime(void (*sortFunc)(int *, size_t),
         printf("OK! Time: %.3f s.\n", time);
 
         // запись в файл
-        char filename[256];
+        char filename[256] = "SortTime";
         //TODO не понял до конца что такое name из методички, решил заменить на название имя файла
-        sprintf(filename, "./data/%s.csv", "experiment");
+        sprintf(filename, "./data/%s.csv", experimentName);
         FILE *f = fopen(filename, "a");
         if (f == NULL) {
             printf("FileOpenError %s", filename);
@@ -143,4 +145,53 @@ void selectionSort(int *a, size_t n) {
 }
 
 
+void combSort(int *a, size_t n) {
+    size_t gap = n;
+    int swapped = 1;
+    while (gap > 1 || swapped) {
+        if (gap > 1)
+            gap /= 1.24733;
+        swapped = 0;
+        for (size_t i = 0, j = i + gap; j < n; ++i, ++j) {
+            if (a[i] > a[j]) {
+                swap(&a[i], &a[j]);
+                swapped = 1;
+            }
+        }
+    }
+}
+
+void shellSort(int *const a, size_t n) {
+    for (size_t s = n / 2; s > 0; s /= 2) {
+        for (int i = s; i < n; ++i) {
+            for (int j = i - s; j >= 0 && a[j] > a[j + s]; j -= s)
+                swap(&a[j], &a[j + s]);
+        }
+    }
+}
+
+
+/// сортировка шелла с набором чисел хиббарда, сложность О(n ^^ 3/2)
+void hibbardShellSort(int *const a, size_t n) {
+    int *leftBorder = a;
+    int *rightBorder = a + n;
+    int sz = n;
+    if (sz <= 1) return;
+    int step = 1;
+    while (step < sz) step <<= 1;
+    step >>= 1;
+    step--;
+    while (step >= 1) {
+        for (int *i = leftBorder + step; i < rightBorder; i++) {
+            int *j = i;
+            int *diff = j - step;
+            while (diff >= leftBorder && *diff > *j) {
+                swap(diff, j);
+                j = diff;
+                diff = j - step;
+            }
+        }
+        step /= 2;
+    }
+}
 

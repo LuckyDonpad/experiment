@@ -2,46 +2,49 @@
 #include "sorts/sorts.h"
 #include "assert.h"
 
-#define ARRAY_SIZE(a) sizeof(a) / sizeof(a[0]);
 
-//void timeExperiment() {
-//   // описание функций сортировки
-//   SortFunc sorts[] = {
-//           {selectionSort, " selectionSort "},
-//           {insertionSort, " insertionSort "},
-//           // вы добавите свои сортировки
-//   };
-//   const unsigned FUNCS_N = ARRAY_SIZE(sorts);
-//
+void timeExperiment() {
+    // описание функций сортировки
+    SortFunc sorts[] = {
+            {selectionSort,    " selectionSort "},
+            {insertionSort,    " insertionSort "},
+            {dumbBubbleSort,   "dumbBubbleSort"},
+            {shellSort,        " shellSort "},
+            {hibbardShellSort, " hibbardShellSort "},
+            {smartBubbleSort,  "dumbBubbleSort"}
+            // вы добавите свои сортировки
+    };
+    const unsigned FUNCS_N = ARRAY_SIZE(sorts);
+
 // описание функций генерации
-//  GeneratingFunc generatingFuncs[] = {
+    GeneratingFunc generatingFuncs[] = {
 // генерируется случайный массив
-//        {generateRandomArray,      " random "},
+            {generateRandom,          " random "},
 // генерируется массив 0, 1, 2, ..., n - 1
-//      {generateOrderedArray,     " ordered "},
+            {generateOrdered,         " ordered "},
 // генерируется массив n - 1, n - 2, ..., 0
-//    {generateOrderedBackwards, " orderedBackwards "}
-//};
-//const unsigned CASES_N = ARRAY_SIZE(generatingFuncs);
+            {generateOrderedBackward, " orderedBackwards "}
+    };
+    const unsigned CASES_N = ARRAY_SIZE(generatingFuncs);
 
 // запись статистики в файл
-//for (size_t size = 10000; size <= 100000; size += 10000) {
-//    printf(" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n");
-//    printf(" Size : %d\n", size);
-//    for (int i = 0; i < FUNCS_N; i++) {
-//        for (int j = 0; j < CASES_N; j++) {
-//            // генерация имени файла
-//            static char filename[128];
-//            sprintf(filename, "%s_%s_time ",
-//                    sorts[i].name, generatingFuncs[j].name);
-//  checkTime(sorts[i].sort,
-//              generatingFuncs[j].generate,
-//                size, filename);
-//    }
-//  }
-//    printf("\n");
-//  }
-//}
+    for (size_t size = 10000; size <= 100000; size += 10000) {
+        printf(" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n");
+        printf(" Size : %d\n", size);
+        for (int i = 0; i < FUNCS_N; i++) {
+            for (int j = 0; j < CASES_N; j++) {
+                // генерация имени файла
+                static char filename[128] = "SortTime";
+                sprintf(filename, "%s_%s_time ",
+                        sorts[i].name, generatingFuncs[j].name);
+                checkTime(sorts[i].sort,
+                          generatingFuncs[j].generate,
+                          size, filename);
+            }
+        }
+        printf("\n");
+    }
+}
 
 void test_isOrdered() {
     int array1[5] = {1, 1, 1, 1, 1};
@@ -68,14 +71,14 @@ void test_swap_smokeTest() {
     assert(a == 69 and b == 42);
 }
 
-void test_dumbBubbleSort_smokeTest(){
+void test_dumbBubbleSort_smokeTest() {
     int array[100];
     generateRandom(array, 100);
     dumbBubbleSort(array, 100);
     assert(isOrdered(array, 100));
 }
 
-void test_smartBubbleSort_smokeTest(){
+void test_smartBubbleSort_smokeTest() {
     int array[100];
     generateRandom(array, 100);
     smartBubbleSort(array, 100);
@@ -83,25 +86,46 @@ void test_smartBubbleSort_smokeTest(){
 }
 
 // You have awakened an ancient evil
-void test_bogosort_loooooooooooooooooooooooooongTest(){
+void test_bogosort_loooooooooooooooooooooooooongTest() {
     int array[13];
     generateRandom(array, 13);
     bogoSort(array, 13);
     assert(isOrdered(array, 13));
 }
 
-void test_insertionSort_smokeTest(){
+void test_insertionSort_smokeTest() {
     int array[100];
     generateRandom(array, 100);
     insertionSort(array, 100);
     assert(isOrdered(array, 100));
 }
 
-void test_selectionSort_smokeTest(){
+void test_selectionSort_smokeTest() {
     int array[100];
     generateRandom(array, 100);
     selectionSort(array, 100);
     assert(isOrdered(array, 100));
+}
+
+void test_combSort_smokeTest() {
+    int array[100];
+    generateRandom(array, 100);
+    combSort(array, 100);
+    assert(isOrdered(array, 100));
+}
+
+void test_ShellSort_smokeTest() {
+    int array[100];
+    generateRandom(array, 100);
+    shellSort(array, 100);
+    assert(isOrdered(array, 100));
+}
+
+void test_HibardShellSort_smokeTest() {
+    int array[10];
+    generateRandom(array, 10);
+    hibbardShellSort(array, 10);
+    assert(isOrdered(array, 10));
 }
 
 
@@ -114,10 +138,13 @@ void test() {
     //test_bogosort_loooooooooooooooooooooooooongTest();
     test_insertionSort_smokeTest();
     test_selectionSort_smokeTest();
+    test_combSort_smokeTest();
+    test_ShellSort_smokeTest();
+    test_HibardShellSort_smokeTest();
 }
 
 int main() {
-    test();
+    timeExperiment();
 
     return 0;
 }
