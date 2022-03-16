@@ -26,6 +26,11 @@ typedef struct SortFunc {
     char name[64];                   // имя сортировки используемое при выводе
 } SortFunc;
 
+typedef struct SortFunc_C {
+    long long (*sort )(int *a, size_t n); // указатель на функцию сортировки
+    char name[64];                   // имя сортировки используемое при выводе
+} SortFunc_C;
+
 typedef struct GeneratingFunc {
     void (*generate )(int *a, size_t n); // указатель на функцию генерации последовательности.
     char name[64];                       // имя генератора, используемое при выводе
@@ -36,6 +41,10 @@ double getTime();
 void checkTime(void (*sortFunc)(int *, size_t),
                void (*generateFunc)(int *, size_t),
                size_t size, char *experimentName);
+
+void checkComparisons(long long (*sortFunc)(int *, size_t),
+                      void (*generateFunc)(int *, size_t),
+                      size_t size, char *experimentName);
 
 void generateOrdered(int *a, size_t n);
 
@@ -66,5 +75,19 @@ void shellSort(int *a, size_t n);
 void hibbardShellSort(int *const a, size_t n);
 
 void radixSort(int *a, size_t n);
+
+long long getComparisonsDumbBubbleSort(int *a, size_t n);
+
+long long getComparisonsSmartBubbleSort(int *a, size_t n);
+
+long long getComparisonsInsertionSort(int *a, size_t n);
+
+long long getComparisonsSelectionSort(int *a, size_t n);
+
+long long getComparisonsCombSort(int *a, size_t n);
+
+long long getComparisonsShellSort(int *a, size_t n);
+
+long long getComparisonsHibbardShellSort(int *a, size_t n);
 
 #endif //UNTITLED_SORTS_H

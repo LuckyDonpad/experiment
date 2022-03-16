@@ -8,10 +8,10 @@ void timeExperiment() {
     SortFunc sorts[] = {
             {selectionSort,    " selectionSort "},
             {insertionSort,    " insertionSort "},
-            {dumbBubbleSort,   "dumbBubbleSort"},
             {shellSort,        " shellSort "},
             {hibbardShellSort, " hibbardShellSort "},
-            {smartBubbleSort,  "dumbBubbleSort"}
+            {smartBubbleSort,  " dumbBubbleSort "},
+            {combSort, " combSort "},
             // вы добавите свои сортировки
     };
     const unsigned FUNCS_N = ARRAY_SIZE(sorts);
@@ -45,6 +45,51 @@ void timeExperiment() {
         printf("\n");
     }
 }
+
+void comparisonsExperiment() {
+    // описание функций сортировки
+    SortFunc_C sorts[] = {
+            {getComparisonsSelectionSort,    " selectionSort "},
+            {getComparisonsInsertionSort,    " insertionSort "},
+            {getComparisonsShellSort,        " shellSort "},
+            {getComparisonsHibbardShellSort, " hibbardShellSort "},
+            {getComparisonsSmartBubbleSort,  " smartBubbleSort "},
+            {getComparisonsCombSort, " combSort "},
+            {getComparisonsDumbBubbleSort, " dumbBubbleSort "}
+            // вы добавите свои сортировки
+    };
+    const unsigned FUNCS_N = ARRAY_SIZE(sorts);
+
+// описание функций генерации
+    GeneratingFunc generatingFuncs[] = {
+// генерируется случайный массив
+            {generateRandom,          " random "},
+// генерируется массив 0, 1, 2, ..., n - 1
+            {generateOrdered,         " ordered "},
+// генерируется массив n - 1, n - 2, ..., 0
+            {generateOrderedBackward, " orderedBackwards "}
+    };
+    const unsigned CASES_N = ARRAY_SIZE(generatingFuncs);
+
+// запись статистики в файл
+    for (size_t size = 10000; size <= 100000; size += 10000) {
+        printf(" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n");
+        printf(" Size : %d\n", size);
+        for (int i = 0; i < FUNCS_N; i++) {
+            for (int j = 0; j < CASES_N; j++) {
+                // генерация имени файла
+                static char filename[128] = "Comparisons";
+                sprintf(filename, "%s_%s_comparisons ",
+                        sorts[i].name, generatingFuncs[j].name);
+                checkComparisons(sorts[i].sort,
+                          generatingFuncs[j].generate,
+                          size, filename);
+            }
+        }
+        printf("\n");
+    }
+}
+
 
 void test_isOrdered() {
     int array1[5] = {1, 1, 1, 1, 1};
